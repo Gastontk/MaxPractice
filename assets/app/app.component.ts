@@ -50,12 +50,18 @@ export class AppComponent implements OnInit{
     			(data:any)=>{
     				// console.log(data._body)
     				this.picData = data.pics
+    				console.log('parents', this.picData[1].parents[0].name)
     				for(let x of this.picData){
     					this.large[x] = false;
     					this.showAddChild[x] = false;
+    					// if(x.parents[0].name){
+    					// 	console.log('x parents', x.parents[0].name)
+    						
+    					// }
+
+
     				}
-    				// console.log(this.showAddChild);
-    				console.log(this.picData[0])
+    				
     			},
     			(err:any)=>{
     				console.log(err);

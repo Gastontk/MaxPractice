@@ -26,7 +26,9 @@ router.get('/pics/:pic', function(req, res, next){
 //get DB list of users and pics
 router.get('/pics', function(req, res, next){
 	console.log('getting pics')
-	Pic.find({}, function(err, docs){
+	Pic.find({})
+	 .populate('parents', ['name','url'])
+	 .exec(function(err, docs){
 		// console.log(docs)
 		res.json({pics:docs})
 	})
