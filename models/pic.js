@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 var schema = new Schema({
 	url: {type: String, required: true},
 	name: {type:String, required: true},
+	notes: {type:String},
 	children: [{type: Schema.Types.ObjectId, ref: 'Pic'}],
 	parents: [{type: Schema.Types.ObjectId, ref: 'Pic'}]
 

@@ -38,8 +38,29 @@ router.get('/pics', function(req, res, next){
 router.get('/profile', function(req, res, next){
 	res.redirect('/');
 })
+//edit person
+router.post('/profile/:id',function(req, res){
+	console.log('In router Post for edit', req.params)
+	Pic.findById(req.params.id, function(err, person){
+		if(err){
+			console.log('An error grabbing person', err)
+		}else{
+			console.log(person);
+			person.notes = req.body.notes;
+			person.name = req.body.name;
+			person.save(function(err){
+				if(err){console.log(err)}
+				else{
+					res.redirect('/');
+				}
+			})
+		}
+	})
+
+})
 
 
+//Add a new person
 router.post('/profile', upload.single('file'), function(req, res) {
 	// console.log('filename',req.file.originalname.split('.').pop())
 	console.log('body',req.body)
@@ -54,7 +75,8 @@ router.post('/profile', upload.single('file'), function(req, res) {
 //save reference to user and pic in DB
 	var pic = new Pic({
 		url: finalUrl,
-		name: req.body.name
+		name: req.body.name,
+		notes: req.body.notes
 	})
 	pic.save(function(err){
 		if(err){console.log(error)}
@@ -77,23 +99,6 @@ router.post('/profile', upload.single('file'), function(req, res) {
 
 //add child to existing pic(USER)
 router.post('/addChild', upload.single('file'), function(req, res){
-//grab parent and add child into children field
-
-	User.findById(req.body.parentId, function(err, response){
-		if(err){
-			console.log(err)
-		}else{
-			console.log(response)
-
-		}
-	})
-
-
-
-
-
-
-
 
 
 
@@ -114,16 +119,31 @@ router.post('/addChild', upload.single('file'), function(req, res){
 		var pic = new Pic({
 			url: finalUrl,
 			name: req.body.name,
+			notes: req.body.notes,
 
 		})
 		
 		pic.parents.push(postData.parentId);
 
-		pic.save(function(err){
+
+		pic.save(function(err, response){
 			if(err){console.log(error)}
 			else{
-				res.redirect('/');
+				// console.log(response);
+				// res.redirect('/');
 			}
+		})
+		Pic.findById(postData.parentId, function(err, doc){
+			console.log('Doc is', doc)
+			doc.children.push(pic._id)
+			doc.save(function(err){
+				if(err){
+					console.log(err)
+				}else{
+					res.redirect('/');
+
+				}
+			})
 		})
 
 
@@ -141,11 +161,7 @@ router.post('/addChild', upload.single('file'), function(req, res){
 
 
 
-	// var user = Pic.findById(req.body.id, function(err, data){
-	// 	console.log(data);
 
-
-	// })
 
 
 

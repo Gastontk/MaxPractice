@@ -1,0 +1,8 @@
+
+
+
+<div class="sidenav">
+	<div *ngFor = 'let pic of picData'>
+		<a routerLink="/person/{{pic._id}}">{{pic.name}}</a>
+	</div>
+</div>
