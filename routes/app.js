@@ -27,7 +27,8 @@ router.get('/pics/:pic', function(req, res, next){
 router.get('/pics', function(req, res, next){
 	console.log('getting pics')
 	Pic.find({})
-	 .populate('parents', ['name','url'])
+	 .populate('parents', ['name','url','_id'])
+	 .populate('children', ['name', 'url', '_id'])
 	 .exec(function(err, docs){
 		// console.log(docs)
 		res.json({pics:docs})
@@ -85,9 +86,6 @@ router.post('/profile', upload.single('file'), function(req, res) {
 		}
 	})
 
-
-
-
       res.render('index', {
         message: 'File uploaded successfully',
         filename: req.file.originalname
@@ -99,9 +97,6 @@ router.post('/profile', upload.single('file'), function(req, res) {
 
 //add child to existing pic(USER)
 router.post('/addChild', upload.single('file'), function(req, res){
-
-
-
 
 //handle saving of new Pic(user) with addition of parentId pushed into parents field.
 	var postData = req.body
@@ -178,14 +173,13 @@ router.get('/image.png', function (req, res) {
 
 
 router.get('/', function (req, res, next) {
-	User.findOne({}, function( err, doc){
-		if(err){
-			console.log('error occured')
-			return res.send('Error occcured.')
-		}
-    res.render('index', {email: doc});
-
-	})
+	// User.findOne({}, function( err, doc){
+	// 	if(err){
+	// 		console.log('error occured')
+	// 		return res.send('Error occcured.')
+	// 	}
+    res.render('index');
+	// })
 });
 
 
