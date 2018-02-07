@@ -20,13 +20,8 @@ router.post('/delete', function(req, res){
 	// 	console.log(response);
 	// })
 	Pic.remove({ _id: req.body.data }, function(err) {
-    if (err) {
-            console.log(err);
-    }
-    else {
-    	console.log('successfully deleted user')
-    }
-});
+	});
+	res.redirect('/');
 	
 })
 
