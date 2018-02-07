@@ -18,6 +18,12 @@ export class PersonService {
 
     }
 
+    deletePic(pic){
+    	console.log('service deletePic')
+    	return this.http.post('/delete', {data: pic}).map(res => res.json);
+
+    }
+
 
    getPerson(param){
    	console.log('In service getPerson', param)

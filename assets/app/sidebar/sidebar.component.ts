@@ -44,8 +44,7 @@ export class SidebarComponent implements OnInit{
     			(data:any)=>{
     				// console.log(data._body)
     				this.picData = data.pics
-    				console.log('parents', this.picData[1].parents[0].name)
-    				console.log('picData is:', this.picData)
+    				
     				
     			},
     			(err:any)=>{

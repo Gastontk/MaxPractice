@@ -24,7 +24,6 @@
 
 
 
-
 <div class = 'picHolder' *ngFor='let pic of picData; let i=index;' >
     <div style = 'overflow: auto;'class="col-sm-10 col-md-8 col-md-offset-2">
         <h3 [ngStyle] = "{'color': getColor()}">{{pic.name}} <a routerLink="/person/{{pic._id}}">Edit - </a><a (click)='showAddChild[i] = !showAddChild[i]'>Add Child</a>
@@ -32,7 +31,7 @@
 
         <div style =''>
             <div style ='width: 50%; float:left; overflow:hidden;'>
-                <a (click) ="large[i] =!large[i]"><img  [ngStyle] = "{'width': '150px'}" src="{{pic.url}}"></a>
+                <a (click) ="large[i] =!large[i]" (mouseenter) ="large[i] =!large[i]" (mouseleave) ="large[i] =!large[i]"><img  [ngStyle] = "{'width': '150px'}" src="{{pic.url}}"></a>
             </div>
             <div style='overflow:hidden'>
 

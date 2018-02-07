@@ -14,6 +14,22 @@ router.post('/upload', function (req, res) {
 	
 });
 
+router.post('/delete', function(req, res){
+	console.log('deleteing', req.body)
+	// Pic.findById(req.body.data, function(err, response){
+	// 	console.log(response);
+	// })
+	Pic.remove({ _id: req.body.data }, function(err) {
+    if (err) {
+            console.log(err);
+    }
+    else {
+    	console.log('successfully deleted user')
+    }
+});
+	
+})
+
 
 
 router.get('/pics/:pic', function(req, res, next){

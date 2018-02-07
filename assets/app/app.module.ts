@@ -9,6 +9,7 @@ import { PersonComponent } from './person/person.component'
 import { ListComponent } from './list/list.component';
 import { PersonService } from './person.service';  
 import { SidebarComponent } from './sidebar/sidebar.component'
+import { AddDeleteComponent } from './addDelete/addDelete.component'
 
 
 const appRoutes: Routes=[
@@ -17,8 +18,9 @@ const appRoutes: Routes=[
     // canActivate:[AuthGuard], 
     pathMatch: 'full',
     },
+	{path: 'xxx', component: AddDeleteComponent},
 	{path: 'person/:id', component: PersonComponent},
-	{path: 'list', component: ListComponent}
+	{path: 'list', component: ListComponent},
 
 ]
 
@@ -28,7 +30,8 @@ const appRoutes: Routes=[
         AppComponent,
         PersonComponent,
         ListComponent,
-        SidebarComponent
+        SidebarComponent,
+        AddDeleteComponent,
     ],
     imports: [
     	BrowserModule, 
