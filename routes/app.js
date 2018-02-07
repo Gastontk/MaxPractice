@@ -82,7 +82,7 @@ router.post('/profile', upload.single('file'), function(req, res) {
   fs.rename(req.file.path, 'public/pics/' +req.file.filename, function(err) {
     if (err) {
       console.log(err);
-      res.send(500);
+      // res.send(500);
     } else {
 //save reference to user and pic in DB
 	var pic = new Pic({
@@ -96,11 +96,6 @@ router.post('/profile', upload.single('file'), function(req, res) {
 			res.redirect('/');
 		}
 	})
-
-      res.render('index', {
-        message: 'File uploaded successfully',
-        filename: req.file.originalname
-      });
     }
   });
 });
