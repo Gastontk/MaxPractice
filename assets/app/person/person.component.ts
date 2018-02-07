@@ -34,7 +34,7 @@ export class PersonComponent implements OnInit{
     				console.log('Data is', data)
     				// console.log(data._body)
     				this.picData = data.pics
-    				console.log('data.pickd', data.pics)
+    				console.log('data.picks', data.pics)
     				// console.log('parents', this.picData[1].parents[0].name)
 			    	for(let x of this.picData){
 						console.log('x is', x._id);
@@ -80,6 +80,7 @@ export class PersonComponent implements OnInit{
 
 						if(x._id == this.sentParams.id){
 							console.log('MATCH')
+							console.log('children', x.children)
 							this.editPerson = x;
 						}
 					}

@@ -3,6 +3,27 @@
 <h1>Edit {{editPerson.name}}'s Info</h1>
 <hr>
 
+<div *ngIf = 'editPerson.children.length != 0'>
+	<label for="">Children</label>
+
+	<div *ngFor = 'let child of editPerson.children'>
+		<a routerLink="/person/{{child._id}}">{{child.name}} 
+		<img width = '50px' src="{{child.url}}" alt=""></a> <br> <hr>
+
+	</div>
+
+</div>
+
+<div *ngIf = 'editPerson.parents.length != 0'>
+	<label for="">Parent</label>
+
+	<div *ngFor = 'let parent of editPerson.parents'>
+		<a routerLink="/person/{{parent._id}}">
+		{{parent.name}} 
+		<img  width = '50px' src="{{parent.url}}" alt=""> </a><br> <hr>
+
+	</div>
+</div>
 
 
 
@@ -20,4 +41,15 @@
 		<input type="submit">
 	</div>
 </form>
-<img src="{{editPerson.url}}" width = '100%' alt="{{editPerson.name">
+<img src="{{editPerson.url}}" width = '100%' alt="{{editPerson.name}}">
+
+<!-- <h1>Children: </h1>
+<div *ngIf = 'editperson.children'>
+	<div *ngFor = 'let child of editperson.children'>
+				{{child.name}}
+
+
+	</div>
+</div>
+
+ -->
