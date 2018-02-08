@@ -23,74 +23,78 @@
 </div> -->
 
 
+<div class = 'container'>
+    <div class = 'picHolder ' *ngFor='let pic of picData; let i=index;' style="overflow-y: scroll;"> 
+         <div class="row">
 
-<div class = 'picHolder' *ngFor='let pic of picData; let i=index;' style="overflow-y: scroll;">
-    <div style = 'overflow: auto;'class="col-sm-10 col-md-8 col-md-offset-2">
-        <h3 [ngStyle] = "{'color': getColor()}">{{pic.name}} <a routerLink="/person/{{pic._id}}">Edit - </a><a (click)='showAddChild[i] = !showAddChild[i]'>Add Child</a>
-        </h3>
+          <div class="col-md-7 col-sm-11">
+            <div style = 'overflow-y: scroll;'class="col-sm-12 col-md-10 col-md-offset-2 ">
+                <h3 [ngStyle] = "{'color': getColor()}">{{pic.name}} <a routerLink="/person/{{pic._id}}">Edit - </a><a (click)='showAddChild[i] = !showAddChild[i]'>Add Child</a>
+                </h3>
+                    <div style ='width: 20%;float:left;'>
+                        <a (click) ="large[i] =!large[i]" (mouseenter) ="large[i] =!large[i]" (mouseleave) ="large[i] =!large[i]"><img  [ngStyle] = "{'width': '150px'}" src="{{pic.url}}"></a>
+                    </div>
+                    <div style='width:60%; float:right;'>
 
-        <div style =''>
-            <div style ='width: 50%; float:left; overflow:hidden;'>
-                <a (click) ="large[i] =!large[i]" (mouseenter) ="large[i] =!large[i]" (mouseleave) ="large[i] =!large[i]"><img  [ngStyle] = "{'width': '150px'}" src="{{pic.url}}"></a>
+                        <p style =''>{{pic.notes}}</p>
+                    </div>
             </div>
-            <div style='overflow:hidden'>
+          </div>
+         </div>
 
-                <p style ='height: 100%; float:right'>{{pic.notes}}</p>
-            </div>
-        </div>
-        <div>
-            <hr>
-            <img *ngIf = 'large[i]' src="{{pic.url}}" width='100%;' alt="">
+<!--             
+                <div>
+                    <hr>
+                    <img *ngIf = 'large[i]' src="{{pic.url}}" width='40%;' alt="">
 
-        </div>
-        <br>
-        <br>
-
-        <div>
-            <div *ngIf ="pic.parents.length !=0" style = 'width:25%;padding:5px;'>
-                Parent:
-                <br>
-                <a routerLink="/person/{{pic.parents[0]._id}}"><p>{{pic.parents[0].name}}</p><img src="{{pic.parents[0].url}}" width = '50%;'></a> 
-
-            </div>
-
-            <div *ngIf ="pic.children.length !=0" >
-                Children:
-                <br>
-                <div style = 'width:25%;padding:5px;' *ngFor = 'let child of pic.children'>
-                     <a routerLink="/person/{{child._id}}"><p>{{child.name}}</p><img src = '{{child.url}}' width = '50%;'></a> 
-                </div>
-            </div>
-        </div>
-
+                </div> -->
 
         
-        <div class ='largeImageHolder' *ngIf = 'showAddChild[i]'>
-            <div style='background-color:darkgrey;padding:5px;border solid black 1px;'   >
-                <form method="post" enctype="multipart/form-data" action="/addChild">
-                    <div class="form-group">
-                        <input hidden ="true" type="text" value ="{{pic._id}}" name ='parentId'>
-                        <label for="">name</label>
-                        <input class= 'form-control' type="text" name = 'name'>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Photo</label>
-                     <input  class= 'form-control' type="file" name="file">
-                    </div>
-                    <div class = 'form-group'>
-                        <label for="notes">Notes</label>
-                        <textarea name="notes" id="" cols="30" rows="10"></textarea>
-                    </div>
-                    <div class="form-group">
-                     <input type="submit" class = 'btn btn-default' value="Add Child">
-                    </div>
-                </form>
-                <br>
+                <div style = 'display;inline-block;'>
+                    <div *ngIf ="pic.parents.length !=0" style = 'width:25%;'>
+                        Parent:
+                        <br>
+                        <a routerLink="/person/{{pic.parents[0]._id}}"><p>{{pic.parents[0].name}}</p><img src="{{pic.parents[0].url}}" width = '25%;'></a> 
 
+                    </div>
+
+                    <div *ngIf ="pic.children.length !=0" style='display:inline-block;'>
+                        Children:
+                        <br>
+                        <div style = 'width:25%;padding:5px;' *ngFor = 'let child of pic.children'>
+                             <a routerLink="/person/{{child._id}}"><p>{{child.name}}</p><img src = '{{child.url}}' width = '50%;'></a> 
+                        </div>
+                    </div>
+                </div>
+
+
+                
+                <div class ='largeImageHolder' *ngIf = 'showAddChild[i]'>
+                    <div style='background-color:darkgrey;padding:5px;border solid black 1px;'   >
+                        <form method="post" enctype="multipart/form-data" action="/addChild">
+                            <div class="form-group">
+                                <input hidden ="true" type="text" value ="{{pic._id}}" name ='parentId'>
+                                <label for="">name</label>
+                                <input class= 'form-control' type="text" name = 'name'>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Photo</label>
+                             <input  class= 'form-control' type="file" name="file">
+                            </div>
+                            <div class = 'form-group'>
+                                <label for="notes">Notes</label>
+                                <textarea name="notes" id="" cols="30" rows="10"></textarea>
+                            </div>
+                            <div class="form-group">
+                             <input type="submit" class = 'btn btn-default' value="Add Child">
+                            </div>
+                        </form>
+                        <br>
+
+                    </div>
+                    
+                </div>
             </div>
-            
-        </div>
-    </div>
 </div>
 
 

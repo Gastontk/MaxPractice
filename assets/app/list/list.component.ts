@@ -17,7 +17,7 @@ import { PersonService } from '../person.service'
     		.picHolder{
     			display:inline-block;
     			margin:10px;
-    			height: 500px;
+                max-height:2000px;
     			width: 80%;
     			background-color:linen;
     			border: solid black 3px;
