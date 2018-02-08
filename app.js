@@ -48,4 +48,27 @@ app.use(function (req, res, next) {
 });
 
 
+//from www file
+var http = require('http');
+
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen('8123');
+// end of www file
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = app;
