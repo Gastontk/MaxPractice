@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 
 
 var schema = new Schema({
-	info: {type: String}
+	info: String,
+	location: [{}]
 	
 	
 })

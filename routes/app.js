@@ -8,8 +8,12 @@ var Ipinfo = require('../models/ipinfo');
 var multer  = require('multer')
 var upload = multer({ dest: 'public/pics/' })
 var fs = require('fs');
-
+//get ip of req
 var getIP = require('ipware')().get_ip;
+
+//geo locating based on ip
+var iplocation = require('iplocation')
+
 
 
 
@@ -40,13 +44,31 @@ router.get('/pics/:pic', function(req, res, next){
 
 //get DB list of users and pics
 router.get('/pics', function(req, res, next){
+//for IP logging
 	var ipInfo = getIP(req);
-	var ipdata = new Ipinfo({
-		info: ipInfo.clientIp
-	});
-	ipdata.save(function(err){
+	var ip = ipInfo.clientIp.slice(7)
+	var reqLocation;
+	iplocation(ip, function (error, res) {
+ 		// console.log(res)
+ 		reqLocation = res
+ 		console.log(reqLocation.toString())
+	 	var ipdata = new Ipinfo({
+			info: ip,
+			location: reqLocation
+		});
+		ipdata.save(function(err){
+			
 
+		})
+ 		// console.log('reqLocation', reqLocation.toJson())
+
+ 
 	})
+
+//
+
+
+
 	console.log(ipInfo)
 	console.log('getting pics')
 	Pic.find({})
@@ -220,3 +242,25 @@ router.get('/', function (req, res, next) {
 
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+iplocation('56.70.97.8', function (error, res) {
+ 
+
+ 
+})
