@@ -35,16 +35,19 @@
 <br>
 
 <div>
-	<form action="/profile/{{editPerson._id}}" method='post'>
+	<form action="/profile/{{editPerson._id}}" method='post' enctype="multipart/form-data">
 		<div class="form-group">
 			<input value="{{editPerson.name}}" type="text" class="form-control" name = 'name'>
 			<label for="name">Name</label>
 
 		</div>
 		<div class="form-group">
+             <label for="">Photo</label>
+             <input  class= 'form-control' type="file" name="file">
+        </div>
+		<div class="form-group">
 			<textarea value ="{{editPerson.notes}}" name="notes" id="" cols="30" rows="10" class = 'form-control'></textarea>
 			<label for="notes">Notes</label>
-			
 		</div>
 		<div class="form-group">
 			<input type="submit">

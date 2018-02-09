@@ -9,6 +9,7 @@ var mongoose = require('mongoose')
 var appRoutes = require('./routes/app');
 
 var app = express();
+
 //for your own IP
 var ip = require('ip');
 console.log('Ip is:', ip.address())

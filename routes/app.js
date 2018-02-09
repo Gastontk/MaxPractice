@@ -44,6 +44,8 @@ router.get('/pics/:pic', function(req, res, next){
 
 //get DB list of users and pics
 router.get('/pics', function(req, res, next){
+
+
 //for IP logging
 	var ipInfo = getIP(req);
 	var ip = ipInfo.clientIp.slice(7)
@@ -84,26 +86,70 @@ router.get('/pics', function(req, res, next){
 router.get('/profile', function(req, res, next){
 	res.redirect('/');
 })
+
+
+
 //edit person
-router.post('/profile/:id',function(req, res){
-	console.log('In router Post for edit', req.params)
-	Pic.findById(req.params.id, function(err, person){
-		if(err){
-			console.log('An error grabbing person', err)
-		}else{
-			console.log(person);
-			person.notes = req.body.notes;
-			person.name = req.body.name;
-			person.save(function(err){
-				if(err){console.log(err)}
-				else{
-					res.redirect('/');
+router.post('/profile/:id', upload.single('file'), function(req, res){
+	console.log('In router Post for edit', req.params);
+	var finalUrl = '/pics/' +req.file.filename;
+  	var file = __dirname + '/public/pics/' + req.file.filename;
+
+	 fs.rename(req.file.path, 'public/pics/' +req.file.filename, function(err) {
+	    if (err) {
+	      console.log(err);
+	      // res.send(500);
+	    } else {
+
+
+			Pic.findById(req.params.id, function(err, person){
+				if(err){
+					console.log('An error grabbing person', err)
+				}else{
+					console.log(person);
+					person.notes = req.body.notes;
+					person.name = req.body.name;
+					person.url = finalUrl;
+					person.save(function(err){
+						if(err){console.log(err)}
+						else{
+							res.redirect('/');
+						}
+					})
 				}
 			})
 		}
 	})
 
-})
+});
+
+
+	
+
+
+
+
+
+
+
+//go back to here if failure occurs
+// 	Pic.findById(req.params.id, function(err, person){
+// 		if(err){
+// 			console.log('An error grabbing person', err)
+// 		}else{
+// 			console.log(person);
+// 			person.notes = req.body.notes;
+// 			person.name = req.body.name;
+// 			person.save(function(err){
+// 				if(err){console.log(err)}
+// 				else{
+// 					res.redirect('/');
+// 				}
+// 			})
+// 		}
+// 	})
+
+// })
 
 
 //Add a new person
@@ -250,17 +296,3 @@ module.exports = router;
 
 
 
-
-
-
-
-
-
-
-
-
-iplocation('56.70.97.8', function (error, res) {
- 
-
- 
-})
