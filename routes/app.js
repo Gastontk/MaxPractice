@@ -2,11 +2,15 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var Pic = require('../models/pic');
+var Ipinfo = require('../models/ipinfo');
 
 //for image upload
 var multer  = require('multer')
 var upload = multer({ dest: 'public/pics/' })
 var fs = require('fs');
+
+var getIP = require('ipware')().get_ip;
+
 
 
 
@@ -36,6 +40,14 @@ router.get('/pics/:pic', function(req, res, next){
 
 //get DB list of users and pics
 router.get('/pics', function(req, res, next){
+	var ipInfo = getIP(req);
+	var ipdata = new Ipinfo({
+		info: ipInfo.clientIp
+	});
+	ipdata.save(function(err){
+
+	})
+	console.log(ipInfo)
 	console.log('getting pics')
 	Pic.find({})
 	 .populate('parents', ['name','url','_id'])
