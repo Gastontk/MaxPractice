@@ -20,7 +20,7 @@ import { PersonService } from '../person.service'
     			height: 500px;
                 max-height:1000px;
     			width: 80%;
-    			background-color:linen;
+    			background-color:black;
     			border: solid black 3px;
     		}
     		// .largeImageHolder{
@@ -41,7 +41,7 @@ export class ListComponent implements OnInit{
 	myString:string = 'test string'
 
 	getColor(){
-		return 'darkGrey'
+		return 'white'
 	}
 
     

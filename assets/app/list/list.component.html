@@ -1,4 +1,19 @@
-
+<!-- 
+<div style ="height:1000px; background-color:red;">
+    
+    <div style ="height:100px;width: 100px; background-color:blue;float:left ">
+        
+    </div>
+    <div style ="height:100px;width: 100px; background-color:green; float:left;">
+        
+    </div>
+        <div style ="height:100px;width: 100px; background-color:grey; float:left;">
+        
+    </div>
+        <div style ="height:100px;width: 100px; background-color:yellow; float:left;">
+        
+    </div>
+</div> -->
 <!--  -->
 <!-- <div>
     <form method="post" enctype="multipart/form-data" action="/profile">
@@ -24,19 +39,24 @@
 
 
 <div class = 'container'>
-    <div class = 'picHolder ' *ngFor='let pic of picData; let i=index;' style="overflow-y: scroll;"> 
+    <div class = 'picHolder ' *ngFor='let pic of picData; let i=index;' style="overflow-y: scroll; border:solid grey 6px;border-radius: 10px;
+"> 
          <div class="row">
 
           <div class="col-md-7 col-sm-11">
             <div style = 'overflow-y: scroll;'class="col-sm-12 col-md-10 col-md-offset-2 ">
-                <h3 [ngStyle] = "{'color': getColor()}">{{pic.name}} <a routerLink="/person/{{pic._id}}">Edit - </a><a (click)='showAddChild[i] = !showAddChild[i]'>Add Child</a>
+                <br>
+                <h3 [ngStyle] = "{'color': getColor()}">{{pic.name}} <br>
+                    <a routerLink="/person/{{pic._id}}">View/Edit {{pic.name}} </a>
+                    <br>
+                    <a (click)='showAddChild[i] = !showAddChild[i]'>Add Offspring</a>
                 </h3>
                     <div style ='width: 20%;float:left;'>
                         <a (click) ="large[i] =!large[i]" (mouseenter) ="large[i] =!large[i]" (mouseleave) ="large[i] =!large[i]"><img  [ngStyle] = "{'width': '150px'}" src="{{pic.url}}"></a>
                     </div>
                     <div style='width:60%; float:right;padding-left:20px'>
 
-                        <p style =''>{{pic.notes}}</p>
+                        <p [ngStyle] = "{'color': getColor()}">{{pic.notes}}</p>
                     </div>
             </div>
           </div>
@@ -52,20 +72,28 @@
 
         
                 <div style =''>
-                    <div *ngIf ="pic.parents.length !=0" style = 'width:50%;float:left'>
+                    <div *ngIf ="pic.parents.length !=0" style = 'width:50%;color:white;'>
                         Parent:
                         <br>
                         <a routerLink="/person/{{pic.parents[0]._id}}"><p>{{pic.parents[0].name}}</p><img src="{{pic.parents[0].url}}" width = '25%;'></a> 
 
                     </div>
 
-                    <div *ngIf ="pic.children.length !=0" style='width:50%;float:right;'>
+                    <div *ngIf ="pic.children.length !=0" style='width:50%;' [ngStyle] = "{'color': getColor()}">
                         Children:
                         <br>
-                        <div style = 'width:25%;padding:5px;' *ngFor = 'let child of pic.children'>
-                             <a routerLink="/person/{{child._id}}"><p>{{child.name}}</p><img src = '{{child.url}}' width = '100%;'></a> 
+                        <div style = 'width:100%;margin:10px;' *ngFor = 'let child of pic.children'>
+                            <div style = 'float:left;width:100px;'>
+                                <a routerLink="/person/{{child._id}}"><p>{{child.name}}</p><img src = '{{child.url}}' width = '100%' height='40%'></a> 
+                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
                 </div>
 
 
@@ -87,7 +115,7 @@
                                 <textarea name="notes" id="" cols="30" rows="10"></textarea>
                             </div>
                             <div class="form-group">
-                             <input type="submit" class = 'btn btn-default' value="Add Child">
+                             <input type="submit" class = 'btn btn-default' value="Add Offspring">
                             </div>
                         </form>
                         <br>

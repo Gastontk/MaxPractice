@@ -92,34 +92,72 @@ router.get('/profile', function(req, res, next){
 //edit person
 router.post('/profile/:id', upload.single('file'), function(req, res){
 	console.log('In router Post for edit', req.params);
-	var finalUrl = '/pics/' +req.file.filename;
-  	var file = __dirname + '/public/pics/' + req.file.filename;
 
-	 fs.rename(req.file.path, 'public/pics/' +req.file.filename, function(err) {
-	    if (err) {
-	      console.log(err);
-	      // res.send(500);
-	    } else {
+  	if(typeof req.file != 'undefined'){
+		var finalUrl = '/pics/' +req.file.filename;
+	  	var file = __dirname + '/public/pics/' + req.file.filename;
 
 
-			Pic.findById(req.params.id, function(err, person){
-				if(err){
-					console.log('An error grabbing person', err)
-				}else{
-					console.log(person);
-					person.notes = req.body.notes;
-					person.name = req.body.name;
-					person.url = finalUrl;
-					person.save(function(err){
-						if(err){console.log(err)}
-						else{
-							res.redirect('/');
-						}
-					})
-				}
-			})
-		}
-	})
+	  	fs.rename(req.file.path, 'public/pics/' +req.file.filename, function(err) {
+		    if (err) {
+		      console.log(err);
+		      // res.send(500);
+		    } else {
+
+
+				Pic.findById(req.params.id, function(err, person){
+					if(err){
+						console.log('An error grabbing person', err)
+					}else{
+						console.log(person);
+						person.notes = req.body.notes;
+						person.name = req.body.name;
+						person.url = finalUrl;
+						person.save(function(err){
+							if(err){console.log(err)}
+							else{
+								res.redirect('/');
+							}
+						})
+					}
+				})
+			}
+		})
+
+
+
+
+
+
+
+
+
+
+
+
+
+  	}else{
+  		console.log('file NOT found');
+		Pic.findById(req.params.id, function(err, person){
+			if(err){
+				console.log('An error grabbing person', err)
+			}else{
+				console.log(person);
+				person.notes = req.body.notes;
+				person.name = req.body.name;
+				person.save(function(err){
+					if(err){console.log(err)}
+					else{
+						res.redirect('/');
+					}
+				})
+			}
+		})
+  	}
+
+
+
+	 
 
 });
 
@@ -226,26 +264,8 @@ router.post('/addChild', upload.single('file'), function(req, res){
 				}
 			})
 		})
-
-
-
-
     }
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 })
 
 
