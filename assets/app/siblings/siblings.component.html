@@ -1,7 +1,25 @@
- <div *ngIf="sentParams.id == 2;else other_content">
+ <div *ngIf="sentParams.id == 1">
 
-	<h1>Siblings - Full and Half</h1>
+	<h3>Max</h3>
+</div> 
+
+ <div *ngIf="sentParams.id == 2">
+
+	<h3>Siblings - Full and Half</h3>
 </div>
+
+<div *ngIf="sentParams.id == 3">
+
+	<h3>Cousins -  Full and Extended</h3>
+</div>
+<div *ngIf="sentParams.id == 4">
+
+	<h3>??? Third Cousins ???</h3>
+</div>
+
+
+
+
 <ng-template #other_content>
 	 <h1>Cousins -  Full and Extended</h1>
 </ng-template>

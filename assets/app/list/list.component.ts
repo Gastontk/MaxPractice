@@ -56,6 +56,12 @@ export class ListComponent implements OnInit{
                 (data:any)=>{
                     // console.log(data._body)
                     this.picData = data.pics
+                //sort name alpha
+                    this.picData.sort((a, b) => {
+                        if (a.name < b.name) return -1;
+                        else if (a.name > b.name) return 1;
+                        else return 0;
+                    });
                     // console.log('parents', this.picData[1].parents[0].name)
                     for(let x of this.picData){
                         this.large[x] = false;
