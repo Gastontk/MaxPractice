@@ -1,0 +1,19 @@
+ <div *ngIf="sentParams.id == 2;else other_content">
+
+	<h1>Siblings - Full and Half</h1>
+</div>
+<ng-template #other_content>
+	 <h1>Cousins -  Full and Extended</h1>
+</ng-template>
+
+    <div  style = 'width:100%;margin:10px;' *ngFor = 'let x of picData'>
+      	<div *ngIf='x.level==sentParams.id'>
+
+	        <div style = 'float:left;width:150px;margin:10px;'>
+	            <a routerLink="/person/{{x._id}}"><p>{{x.name}}</p><img style='max-height:150px;'src = '{{x.url}}' width = '100%' ></a> 
+	         </div>
+	     </div>
+    </div>
+
+
+

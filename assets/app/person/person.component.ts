@@ -24,6 +24,11 @@ export class PersonComponent implements OnInit{
 	sentParams:any
 	constructor(private route: ActivatedRoute, private personService: PersonService){
 
+		
+	}
+
+
+	ngOnInit(){
 		this.route.params.subscribe(param => {
 			console.log('param is', param)
          this.sentParams = this.route.snapshot.params;
@@ -56,10 +61,13 @@ export class PersonComponent implements OnInit{
 		// this.personSer
     	});
 
-	}
 
 
-	ngOnInit(){
+
+
+
+
+		
 
 
 		console.log('params' ,this.route.snapshot.params)

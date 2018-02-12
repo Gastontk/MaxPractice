@@ -2,6 +2,16 @@
 
 
 <div class="sidenav" >
+	<a style = 'margin-left:10px; float:left;' routerLink="/" >Home</a><br>
+	<br>
+
+	<a style = 'margin-left:10px; float:left;' routerLink="/siblings/2">Children/Siblings</a>
+	<br>
+	<br>
+	<a style = 'margin-left:10px; float:left;' routerLink="/siblings/3">Grandchildren/Cousins</a>
+	br
+	<hr>
+
 	<div *ngFor = 'let pic of picData'>
 		<a style = 'margin-left:10px;' routerLink="/person/{{pic._id}}">{{pic.name}}</a>
 	</div>

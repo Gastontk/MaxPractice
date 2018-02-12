@@ -10,7 +10,7 @@ import { ListComponent } from './list/list.component';
 import { PersonService } from './person.service';  
 import { SidebarComponent } from './sidebar/sidebar.component'
 import { AddDeleteComponent } from './addDelete/addDelete.component'
-
+import { SiblingsComponent } from './siblings/siblings.component'
 
 const appRoutes: Routes=[
 	 { path: '',
@@ -21,6 +21,7 @@ const appRoutes: Routes=[
 	{path: 'xxx', component: AddDeleteComponent},
 	{path: 'person/:id', component: PersonComponent},
 	{path: 'list', component: ListComponent},
+    {path: 'siblings/:id', component: SiblingsComponent}
 
 ]
 
@@ -32,6 +33,7 @@ const appRoutes: Routes=[
         ListComponent,
         SidebarComponent,
         AddDeleteComponent,
+        SiblingsComponent
     ],
     imports: [
     	BrowserModule, 

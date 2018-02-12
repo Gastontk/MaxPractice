@@ -123,19 +123,6 @@ router.post('/profile/:id', upload.single('file'), function(req, res){
 				})
 			}
 		})
-
-
-
-
-
-
-
-
-
-
-
-
-
   	}else{
   		console.log('file NOT found');
 		Pic.findById(req.params.id, function(err, person){
@@ -170,25 +157,6 @@ router.post('/profile/:id', upload.single('file'), function(req, res){
 
 
 
-//go back to here if failure occurs
-// 	Pic.findById(req.params.id, function(err, person){
-// 		if(err){
-// 			console.log('An error grabbing person', err)
-// 		}else{
-// 			console.log(person);
-// 			person.notes = req.body.notes;
-// 			person.name = req.body.name;
-// 			person.save(function(err){
-// 				if(err){console.log(err)}
-// 				else{
-// 					res.redirect('/');
-// 				}
-// 			})
-// 		}
-// 	})
-
-// })
-
 
 //Add a new person
 router.post('/profile', upload.single('file'), function(req, res) {
@@ -206,12 +174,15 @@ router.post('/profile', upload.single('file'), function(req, res) {
 	var pic = new Pic({
 		url: finalUrl,
 		name: req.body.name,
-		notes: req.body.notes
+		notes: req.body.notes,
+		level: req.body.level
+
 	})
+	console.log('pic.level is', pic.level, req.body.level)
 	pic.save(function(err){
 		if(err){console.log(error)}
 		else{
-			res.redirect('/');
+			res.redirect('/xxx');
 		}
 	})
     }
@@ -234,36 +205,66 @@ router.post('/addChild', upload.single('file'), function(req, res){
 	      console.log(err);
 	      res.send(500);
 	    } else {
-	//save reference to user and pic in DB
-		var pic = new Pic({
-			url: finalUrl,
-			name: req.body.name,
-			notes: req.body.notes,
-
-		})
-		
-		pic.parents.push(postData.parentId);
 
 
-		pic.save(function(err, response){
-			if(err){console.log(error)}
-			else{
-				// console.log(response);
-				// res.redirect('/');
-			}
-		})
-		Pic.findById(postData.parentId, function(err, doc){
-			console.log('Doc is', doc)
-			doc.children.push(pic._id)
-			doc.save(function(err){
-				if(err){
-					console.log(err)
-				}else{
-					res.redirect('/');
 
-				}
+
+
+
+
+
+
+//get parent(and therefore parent level) and add level to pic before saveing.
+		Pic.findById(postData.parentId, function(err, response){
+			console.log('level is', response.level)
+		 		
+
+				//save reference to user and pic in DB
+			var pic = new Pic({
+				url: finalUrl,
+				name: req.body.name,
+				notes: req.body.notes,
+				level: (response.level +1)
+			})	
+
+			pic.parents.push(postData.parentId);
+			console.log("final pic is", pic)
+
+
+			pic.save(function(err, response){
+					if(err){console.log(error)}
+					else{
+						console.log("pic is", pic)
+						// console.log(response);
+						// res.redirect('/');
+					}
+				})
+
+
+
+
+			Pic.findById(postData.parentId, function(err, doc){
+				console.log('Doc is', doc)
+				doc.children.push(pic._id)
+				doc.save(function(err){
+					if(err){
+						console.log(err)
+					}else{
+						res.redirect('/');
+
+					}
+				})
 			})
+
+
+
+
 		})
+
+
+		
+		
+
     }
   });
 })

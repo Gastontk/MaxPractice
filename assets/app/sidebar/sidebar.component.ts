@@ -37,7 +37,7 @@ export class SidebarComponent implements OnInit{
 
 
 	ngOnInit(){
-		console.log('sidebar' ,this.route.snapshot.params)
+		// console.log('sidebar' ,this.route.snapshot.params)
 		this.sentParams = this.route.snapshot.params
 		this.personService.getPics()
 		.subscribe(
