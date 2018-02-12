@@ -9,7 +9,7 @@ import { PersonService } from '../person.service'
 	selector: 'my-app-person',
     templateUrl: './app.person.html',
     styles: [`
-    		
+  
     `]
 })
 
