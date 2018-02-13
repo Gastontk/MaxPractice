@@ -14,6 +14,13 @@ var getIP = require('ipware')().get_ip;
 //geo locating based on ip
 var iplocation = require('iplocation')
 
+//twilio text (SMS)
+var accountSid = 'AC1ac11efe45372db188c957bafc3059bf'; // Your Account SID from www.twilio.com/console
+var authToken = 'b0ef2064b151dbad223b2e8b6f81a122';   // Your Auth Token from www.twilio.com/console
+
+var twilio = require('twilio');
+var client = new twilio(accountSid, authToken);
+
 
 
 
@@ -163,6 +170,10 @@ router.post('/profile', upload.single('file'), function(req, res) {
 	// console.log('filename',req.file.originalname.split('.').pop())
 	console.log('body',req.body)
 
+
+
+
+
   var finalUrl = '/pics/' +req.file.filename 
   var file = __dirname + '/public/pics/' + req.file.filename;
   fs.rename(req.file.path, 'public/pics/' +req.file.filename, function(err) {
@@ -192,6 +203,16 @@ router.post('/profile', upload.single('file'), function(req, res) {
 
 //add child to existing pic(USER)
 router.post('/addChild', upload.single('file'), function(req, res){
+
+
+	//send text to inform of new offspring
+	let message = 'new offspring ' + req.body.name; 
+	client.messages.create({
+		    body: message,
+		    to: '+12068772788',  // Text this number
+		    from: '+12068008396' // From a valid Twilio number
+	})
+	.then((message) => console.log(message.sid));
 
 //handle saving of new Pic(user) with addition of parentId pushed into parents field.
 	var postData = req.body
@@ -280,13 +301,16 @@ router.get('/image.png', function (req, res) {
 
 
 router.get('/', function (req, res, next) {
-	// User.findOne({}, function( err, doc){
-	// 	if(err){
-	// 		console.log('error occured')
-	// 		return res.send('Error occcured.')
-	// 	}
-    res.render('index');
+//send sms to author
+	// client.messages.create({
+	//     body: "Someone is checking out Max's website",
+	//     to: '+12068772788',  // Text this number
+	//     from: '+12068008396' // From a valid Twilio number
 	// })
+	// .then((message) => console.log(message.sid));
+
+	 res.render('index');
+
 });
 
 
