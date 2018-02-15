@@ -16,8 +16,10 @@ import { PersonComponent } from './person/person.component'
     styles: [`
  		.main{
  			margin-left: 170px;
+ 			// background-color:red;
 
  		}
+
 
     `]})
 export class AppComponent implements OnInit{

@@ -20,18 +20,46 @@
 
 
 
-<ng-template #other_content>
-	 <h1>Cousins -  Full and Extended</h1>
-</ng-template>
+<div class="container">
+<div class="row">
 
-    <div  style = 'width:100%;margin:10px;' *ngFor = 'let x of picData'>
+    <div  *ngFor = 'let x of picData' class="d-flex flex-row align-items-start">
+      	<div *ngIf='x.level==sentParams.id'>
+		 <div class="d-flex flex-row align-items-start">
+
+
+
+
+	        <div class ='card card-inverse mb-4 mr-4' style="width:200px;height:220px;background-color: #333; border-color: #333;" >
+	        	<div class="card-body" >
+	            	<a style ="color:white" routerLink="/person/{{x._id}}">
+	            		<p>{{x.name}}</p>
+	            		<img src = '{{x.url}}' width='100%' ></a> 
+	            </div>
+	            <div class="align-text-top" ><a style="color:white;" routerLink="/person/{{x._id}}">click for more info</a></div>
+	        </div>
+</div>
+</div>
+	      </div>
+	     </div>
+    </div>
+
+
+
+
+
+
+
+
+
+<!--     <div  style = 'width:100%;margin:10px;' *ngFor = 'let x of picData'>
       	<div *ngIf='x.level==sentParams.id'>
 
 	        <div style = 'float:left;width:150px;margin:10px;'>
 	            <a routerLink="/person/{{x._id}}"><p>{{x.name}}</p><img style='max-height:150px;'src = '{{x.url}}' width = '100%' ></a> 
 	         </div>
 	     </div>
-    </div>
+    </div> -->
 
 
 

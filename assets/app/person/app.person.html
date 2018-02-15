@@ -1,91 +1,231 @@
-<div class="top-level" >
-	<a routerLink="/" >Home</a>
-	<h1>Edit {{editPerson.name}}'s Info</h1>
-	<br>
 
-	<div>
-		<form action="/profile/{{editPerson._id}}" method='post' enctype="multipart/form-data">
-			<div class="form-group">
-				<label for="name" >Name</label>				
-				<input  type="text" class="form-control" name = 'name' value ="{{editPerson.name}}">
+<div class="container">
+	<div class="top-level" >
+		<a routerLink="/" >Home</a>
+		<h1>{{editPerson.name}}'s Info</h1>
+		<br>
 
-			</div>
-			<div class="form-group">
-	             <label for="">Photo</label>
-	             <input  class= 'form-control' type="file" name="file" >
-	        </div>
-			<div class="form-group">
-				<textarea value ="{{editPerson.notes}}" name="notes" id="" cols="30" rows="10" class = 'form-control' style ="" ></textarea>
-				<label for="notes">Notes</label>
-			</div>
-			<div class="form-group">
-				<input type="submit">
-			</div>
-		</form>
+	
+
+
+
+
+
+
+
+
+
+<!-- 		<div>
+ -->			<!-- <form action="/profile/{{editPerson._id}}" method='post' enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="name" >Name</label>				
+					<input  type="text" class="form-control" name = 'name' value ="{{editPerson.name}}">
+
+				</div>
+				<div class="form-group">
+		             <label for="">Photo</label>
+		             <input  class= 'form-control' type="file" name="file" >
+		        </div>
+				<div class="form-group">
+					<textarea value ="{{editPerson.notes}}" name="notes" id="" cols="30" rows="10" class = 'form-control' style ="" ></textarea>
+					<label for="notes">Notes</label>
+				</div>
+				<div class="form-group">
+					<input type="submit">
+				</div>
+			</form> -->
+<!-- 		</div>
+ -->	  
+	<div class="row">
+ 	<div class="card card-inverse" style="background-color: #333; border-color: #333; color:white; max-width:500px;">
+		<img class="card-img-top" src="{{editPerson.url}}" width = '100%' alt="{{editPerson.name}}">
+		<div class ="card-body">
+			<h3 class = 'card-title'>{{editPerson.name}}</h3><br>
+			<p class="card-text">			{{editPerson.notes}}
+			</p>			
+		</div>
+
 	</div>
+	</div>
+	<div class="row">
+	<!-- added for modal testing -->
+	<!-- Modal trigger for add offspring -->
+	    <button
+	     class="btn btn-dark mr-3 mt-3" 
+	     data-toggle="modal" 
+	     data-target="#addOffspringModal"
+	     >Add Offspring to {{editPerson.name}}</button>
 
-	<img src="{{editPerson.url}}" width = '100%' alt="{{editPerson.name}}">
-<!-- Children -->
-	<div>
+	   
+
+	<!-- Actual Modal -->
+	    <div class = "modal" id="addOffspringModal">
+	      <div class = "modal-dialog">
+	        <div class="modal-content">
+	          <div class="modal-header">
+	            <h5 class="modal-title">Add Offspring to {{editPerson.name}}</h5>
+	            <button class="close" data-dismiss="modal">&times;</button>
+	          </div>
+	          <div class="modal-body">
+	            <form style = '' method="post" enctype="multipart/form-data" action="/addChild">
+		        <div class="form-group">
+		            <input hidden ="true" type="text" value ="{{editPerson._id}}" name ='parentId'>
+		            <label for="">name</label>
+		            <input class= 'form-control' type="text" name = 'name'>
+		        </div>
+		        <div class="form-group">
+		            <label for="">Photo</label>
+		         <input  class= 'form-control' type="file" name="file">
+		        </div>
+		        <div class = 'form-group'>
+		            <label for="notes">Notes</label>
+		            <textarea style = 'color:black;' name="notes" id="" cols="30" rows="10"></textarea>
+		        </div>
+		        <div class="form-group">
+		         <input type="submit" class = 'btn btn-dark' value="Add Offspring">
+		        </div>
+		    </form>
+	          </div>
+	          <!-- <div class="modal-footer">
+	            <button class="btn btn-dark" data-dismiss="modal">Close</button>
+	            <button data-dismiss="modal" class="btn btn-primary">
+	              submit
+	            </button>
+	          </div> -->
+	        </div>
+	      </div>
+	    </div>
+
+
+
+
+	<!-- //end modal testing
+	 -->
+
+
+	<!-- Modal trigger for edit person info -->
+			    <button
+			     class="btn btn-dark mt-3" 
+			     data-toggle="modal" 
+			     data-target="#loginModal"
+			     >Edit {{editPerson.name}}'s Info</button>
+
+
+	   
+
+	<!-- Actual Modal -->
+	    <div class = "modal" id="loginModal">
+	      <div class = "modal-dialog">
+	        <div class="modal-content">
+	          <div class="modal-header">
+	            <h5 class="modal-title">Edit {{editPerson.name}}'s Info</h5>
+	            <button class="close" data-dismiss="modal">&times;</button>
+	          </div>
+	          <div class="modal-body">
+	            <form action="/profile/{{editPerson._id}}" method='post' enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="name" >Name</label>				
+					<input  type="text" class="form-control" name = 'name' value ="{{editPerson.name}}">
+
+				</div>
+				<div class="form-group">
+		             <label for="">Photo</label>
+		             <input  class= 'form-control' type="file" name="file" >
+		        </div>
+				<div class="form-group">
+					<textarea value ="{{editPerson.notes}}" name="notes" id="" cols="30" rows="10" class = 'form-control' style ="" ></textarea>
+					<label for="notes">Notes</label>
+				</div>
+				<div class="form-group">
+					<input type="submit">
+				</div>
+			</form>
+	          </div>
+	          <!-- <div class="modal-footer">
+	            <button class="btn btn-dark" data-dismiss="modal">Close</button>
+	            <button data-dismiss="modal" class="btn btn-primary">
+	              Submit
+	            </button>
+	          </div> -->
+	        </div>
+	      </div>
+	    </div>
+	   </div>
+
+
+	<!-- Children -->
 		<div *ngIf = "editPerson.children.length != 0" style = ''>
-		<label for="">Children</label>
-		<div class = 'row'>
-			<div *ngFor = 'let child of editPerson.children' class = "col-md-8 col-md-offset-2">
-				<div style = 'width: 15%; float:left;'>
-					<a routerLink="/person/{{child._id}}">{{child.name}} <br>
-					<img  width = '100%' src="{{child.url}}" alt=""></a>
+			<label for="">Children</label>
+
+				<div class ='d-flex flex-row align-items-start row-hl'>
+				  <div class = 'row'>
+					<div *ngFor = 'let child of editPerson.children'>
+
+						<div class >
+							<div class="card  mr-3 mb-3" style="background-color: #333; border-color: #333; width:100px; height:100px" >
+
+								<a class ="card-title" style ="color:white" routerLink="/person/{{child._id}}">{{child.name}} <br>
+								<img class="card-img-bottom"src="{{child.url}}" width="" alt=""></a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<hr>
+		</div>
+
+	<!-- Parent -->
+		<div *ngIf = 'editPerson.parents.length != 0' style = ''>
+		 <div >
+			<label for="">Parent</label>
+		   <div class="row">
+
+			<div class ='d-flex flex-row align-items-start row-hl' *ngFor = 'let parent of editPerson.parents'>
+				<div class="card card-inverse" style="background-color: #333; border-color: #333; width:100px;">
+					<a routerLink="/person/{{parent._id}}">
+					<p class>{{parent.name}}</p>
+
+					
+				 <img class="card-img-top"  src="{{parent.url}}" alt=""> </a><br>
+
 				</div>
 
 			</div>
+		  </div>
+		 </div>
 		</div>
-		<hr>
-		</div>
+
+
+
+	<!-- removed below form and used modal instead -->
+
+	<!-- <p>Add a child to {{editPerson.name}}</p>
+		<div style=';padding:5px;border solid black 1px;'  >
+		    <form style = '' method="post" enctype="multipart/form-data" action="/addChild">
+		        <div class="form-group">
+		            <input hidden ="true" type="text" value ="{{editPerson._id}}" name ='parentId'>
+		            <label for="">name</label>
+		            <input class= 'form-control' type="text" name = 'name'>
+		        </div>
+		        <div class="form-group">
+		            <label for="">Photo</label>
+		         <input  class= 'form-control' type="file" name="file">
+		        </div>
+		        <div class = 'form-group'>
+		            <label for="notes">Notes</label>
+		            <textarea style = 'color:black;' name="notes" id="" cols="30" rows="10"></textarea>
+		        </div>
+		        <div class="form-group">
+		         <input type="submit" class = 'btn btn-default' value="Add Offspring">
+		        </div>
+		    </form>
+		    <br>
+
+
+		</div> -->
+	                    
 	</div>
 
-<!-- Parent -->
-	<div *ngIf = 'editPerson.parents.length != 0' style = 'width:30$'>
-		<label for="">Parent</label>
-
-		<div *ngFor = 'let parent of editPerson.parents'>
-			<div style =''>
-				<a routerLink="/person/{{parent._id}}">
-				{{parent.name}}
-
-				<br>
-				<img  width='15%' src="{{parent.url}}" alt=""> </a><br>
-			</div>
-
-		</div>
-	</div>
-
-
-
-
-<p>Add a child to {{editPerson.name}}</p>
-	<div style=';padding:5px;border solid black 1px;'  >
-	    <form style = '' method="post" enctype="multipart/form-data" action="/addChild">
-	        <div class="form-group">
-	            <input hidden ="true" type="text" value ="{{editPerson._id}}" name ='parentId'>
-	            <label for="">name</label>
-	            <input class= 'form-control' type="text" name = 'name'>
-	        </div>
-	        <div class="form-group">
-	            <label for="">Photo</label>
-	         <input  class= 'form-control' type="file" name="file">
-	        </div>
-	        <div class = 'form-group'>
-	            <label for="notes">Notes</label>
-	            <textarea style = 'color:black;' name="notes" id="" cols="30" rows="10"></textarea>
-	        </div>
-	        <div class="form-group">
-	         <input type="submit" class = 'btn btn-default' value="Add Offspring">
-	        </div>
-	    </form>
-	    <br>
-
-
-	</div>
-                    
 </div>
-
 
